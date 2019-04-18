@@ -2,6 +2,7 @@ const fs = require('fs');
 const config = require('./config/config.json');
 const log = require('./src/logger').log;
 const git = require('./src/git');
+const ng = require('./src/ng');
 const extractData = require('./src/extractData').extractData;
 const clean = require('./src/cleanFolder').clean;
 const dataCopy = require('./src/dataCopy').dataCopy;
@@ -39,6 +40,15 @@ function onGitRemoteSetUrlComplete(error, stdout, stderr) {
 	});
 }
 
+function onProdBuildComplete(error, stdout, stderr) {
+	log('ng prod build finished');
+	if(error) log(error);
+
+	git.remoteSetUrl(projectPath, GitTarget, onGitRemoteSetUrlComplete);
+	//clean(GitCheckoutDestination);
+	//clean(UnzipTarget);
+}
+
 function onGitCloneComplete(error, stdout, stderr) {
 	log('Git clone finished');
 	if(error) log(error);
@@ -46,9 +56,7 @@ function onGitCloneComplete(error, stdout, stderr) {
 	clean(DataCopyTarget);
 	dataCopy(UnzipTarget, DataCopyTarget);
 	
-	git.remoteSetUrl(projectPath, GitTarget, onGitRemoteSetUrlComplete);
-	//clean(GitCheckoutDestination);
-	//clean(UnzipTarget);
+	ng.buildProd(projectPath, onProdBuildComplete);
 }
 
 // HANDLE CHANGES IN DIR
