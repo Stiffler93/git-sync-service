@@ -1,11 +1,11 @@
 {
 	"WorkingDir": "C:\\Users\\sso2bj\\Documents\\Test",
+	"UnzipTarget": "Temp",
 	"DataDir": "Data",
 	"GitCheckoutDestination": "GitCheckout",
 	"GitProjectName": "project",
+	"DataCopyTarget": "src\\assets\\data",
 	"GitSource": "https://github.com/Stiffler93/loziska.git",
 	"GitTarget": "BlubBlub",
-	"UnzipTarget": "C:\\Users\\sso2bj\\Documents\\Test\\Temp",
-	"DataCopyTarget": "C:\\Users\\sso2bj\\Documents\\Test\\GitCheckout\\project\\src\\assets\\data",
-	"LogFile": "C:\\Users\\sso2bj\\Documents\\Test\\service.log"
+	"LogFile": "service.log"
 }

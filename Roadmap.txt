@@ -1,0 +1,18 @@
+
+There are two independent tasks:
+
+At first start of script:
+	
+	1) git clone
+	2) yarn install
+	3) ng build
+	
+On trigger (when data is available):
+
+    1) git remote set-url (for pull)
+	2) git pull
+	3) Extract data
+	4) Copy data into project's data dir
+	5) ng build
+	6) git remote set-url (for push)
+	7) git add | git commit | git push

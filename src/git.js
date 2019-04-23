@@ -32,11 +32,19 @@ function commit(project, message, callback) {
 }
 
 function push(project, callback) {
-	const command = 'cd ' + project + ' && git push --force';
-	log(command + ';');
-	
-	log('Git push is disabled meanwhile as it is too dangerous!');
-	//exec(, {}, callback);
+    const command = 'cd ' + project + ' && git push --force';
+    log(command + ';');
+
+    log('Git push is disabled meanwhile as it is too dangerous!');
+    //exec(, {}, callback);
+}
+
+function pull(project, callback) {
+    const command = 'cd ' + project + ' && git pull --force';
+    log(command + ';');
+
+    log('Git pull is disabled meanwhile as it is too dangerous!');
+    //exec(, {}, callback);
 }
 
 module.exports.clone = clone;
@@ -44,3 +52,4 @@ module.exports.remoteSetUrl = remoteSetUrl;
 module.exports.add = add;
 module.exports.commit = commit;
 module.exports.push = push;
+module.exports.pull = pull;
