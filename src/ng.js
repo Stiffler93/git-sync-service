@@ -1,4 +1,5 @@
-const log = require('./src/logger').log;
+const log = require('./logger').log;
+const exec = require('child_process').exec;
 
 // build needs npm install but that takes too long!
 function build(project, callback) {

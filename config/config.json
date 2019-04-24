@@ -6,6 +6,6 @@
 	"GitProjectName": "project",
 	"DataCopyTarget": "src\\assets\\data",
 	"GitSource": "https://github.com/Stiffler93/loziska.git",
-	"GitTarget": "BlubBlub",
-	"LogFile": "service.log"
+	"GitTarget": "https://github.com/Stiffler93/test.git",
+	"LogFile": "C:\\Users\\sso2bj\\Documents\\Test\\service.log"
 }

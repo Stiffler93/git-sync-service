@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const unzip = require('unzip');
 const log = require('./logger').log;
 
 function copy(from, to) {
@@ -24,24 +25,23 @@ function clean(folder, callback) {
         const stats = fs.statSync(filePath);
 
         if (stats.isFile()) {
-            log('Delete: ' + file);
             fs.unlinkSync(filePath);
         } else if (stats.isDirectory()) {
-            clean(filePath, () => {
-                log('Remove empty directory: ' + folder);
-                fs.rmdirSync(filePath);
-            });
+            clean(filePath, fs.rmdirSync(filePath));
         } else log('WARNING: ' + file + ' is neither a file nor a directory!');
     }
 
     if(callback) callback();
 }
 
-function extract(archive, target) {
+function extract(archive, target, callback) {
     log('Extract data from ' + archive + ' into ' + target + ';');
 
     // see: https://github.com/EvanOxfeld/node-unzip
-    fs.createReadStream(archive).pipe(unzip.Extract({ path: target }));
+    fs.createReadStream(archive).pipe(unzip.Extract({ path: target })).on('close', () => {
+        log('Unzipping finished');
+        if(callback) callback();
+    });
 }
 
 module.exports.extract = extract;

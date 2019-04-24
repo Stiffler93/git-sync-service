@@ -35,16 +35,14 @@ function push(project, callback) {
     const command = 'cd ' + project + ' && git push --force';
     log(command + ';');
 
-    log('Git push is disabled meanwhile as it is too dangerous!');
-    //exec(, {}, callback);
+    exec(command, {}, callback);
 }
 
 function pull(project, callback) {
     const command = 'cd ' + project + ' && git pull --force';
     log(command + ';');
 
-    log('Git pull is disabled meanwhile as it is too dangerous!');
-    //exec(, {}, callback);
+    exec(command, {}, callback);
 }
 
 module.exports.clone = clone;
