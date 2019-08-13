@@ -1,11 +1,11 @@
 const log = require('./logger.js').log;
-const exec = require('child_process').exec;
+const exec = require('child_process').execSync;
 
-function install(project, callback) {
+function install(project) {
     const command = 'cd ' + project + ' && yarn install';
     log(command + ';');
 
-    exec(command, {}, callback);
+    exec(command);
 }
 
 module.exports.install = install;

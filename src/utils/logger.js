@@ -1,5 +1,5 @@
 const fs = require('fs');
-const logFile = require('../config/config').LogFile;
+const logFile = require('../../config/config').LogFile;
 
 function log(text) {
     console.log(text);

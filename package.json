@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "log-timestamp": "^0.3.0",
-    "unzip": "^0.1.11"
+    "node-notifier": "^5.4.1",
+    "path": "^0.12.7"
   }
 }
