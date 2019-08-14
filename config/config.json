@@ -1,11 +1,21 @@
 {
-	"WorkingDir": "C:\\Users\\sso2bj\\Documents\\Test",
-	"UnzipTarget": "Temp",
-	"DataDir": "Data",
-	"GitCheckoutDestination": "GitCheckout",
-	"GitProjectName": "project",
-	"DataCopyTarget": "src\\assets\\data",
-	"GitSource": "https://github.com/Stiffler93/loziska.git",
-	"GitTarget": "https://github.com/Stiffler93/test.git",
-	"LogFile": "C:\\Users\\sso2bj\\Documents\\Test\\service.log"
+  "WorkingDir": "C:\\Users\\sso2bj\\Documents\\Test",
+  "UnzipTarget": "Temp",
+  "DataDir": "Data",
+  "GitCheckoutDestination": "GitCheckout",
+  "DataCopyTarget": "src\\assets\\data",
+  "LogFile": "C:\\Users\\sso2bj\\Documents\\Test\\service.log",
+
+  "Git": {
+    "projectName": "project",
+    "source": "master",
+    "target": "github-pages",
+    "commitMessage": "Data Update"
+  },
+
+  "Notification": {
+    "ID": 45,
+    "title": "Juhu",
+    "message": "Even more Juhu"
+  }
 }

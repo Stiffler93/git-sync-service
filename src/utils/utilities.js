@@ -42,6 +42,6 @@ function clean(folder) {
 //     });
 // }
 
-module.exports.extract = extract;
+// module.exports.extract = extract;
 module.exports.clean = clean;
 module.exports.copy = copy;

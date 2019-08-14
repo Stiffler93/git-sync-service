@@ -17,6 +17,13 @@ function remoteSetUrl(project, url) {
 	exec(command);
 }
 
+function checkout(project, branch) {
+	const command = 'cd ' + project + ' && git checkout ' + branch;
+    log(command + ';');
+
+    exec(command);
+}
+
 function add(project, file) {
 	const command = 'cd ' + project + ' && git add ' + file;
 	log(command + ';');
@@ -45,9 +52,18 @@ function pull(project) {
     exec(command);
 }
 
+function merge(project, source) {
+    const command = 'cd ' + project + ' && git merge -X theirs ' + source;
+    log(command + ';');
+
+    exec(command);
+}
+
 module.exports.clone = clone;
 module.exports.remoteSetUrl = remoteSetUrl;
+module.exports.checkout = checkout;
 module.exports.add = add;
 module.exports.commit = commit;
 module.exports.push = push;
 module.exports.pull = pull;
+module.exports.merge = merge;

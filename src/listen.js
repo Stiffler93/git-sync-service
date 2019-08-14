@@ -1,4 +1,5 @@
 const fs = require('fs');
+const path = require('path');
 const git = require('./utils/git');
 const ng = require('./utils/ng');
 const yarn = require('./utils/yarn');
@@ -12,33 +13,34 @@ function listen(configs) {
         if (eventType === 'change') {
             log('File change was detected: ' + filename);
             if (filename.endsWith(".zip")) {
-                handle(configs.DataDir + '\\' + filename);
+                handle(path.join(configs.DataDir, filename));
             }
         }
     })
 }
 
-function handle(filename, configs) {
-    git.remoteSetUrl(configs.ProjectPath, configs.GitSource);
+function handle(filename, config) {
+    git.checkout(config.ProjectPath, config.Git.source);
+    git.pull(config.ProjectPath);
+    git.checkout(config.ProjectPath, config.Git.target);
+    git.merge(config.ProjectPath, config.Git.source);
 
-    git.pull(configs.ProjectPath);
+    yarn.install(config.ProjectPath);
 
-    yarn.install(configs.ProjectPath);
+    utilities.clean(config.UnzipTarget);
+    utilities.clean(config.DataCopyTarget);
+    utilities.extract(filename, config.UnzipTarget);
 
-    utilities.clean(configs.UnzipTarget);
-    utilities.clean(configs.DataCopyTarget);
-    utilities.extract(filename, configs.UnzipTarget);
+    utilities.copy(config.UnzipTarget, config.DataCopyTarget);
 
-    utilities.copy(configs.UnzipTarget, configs.DataCopyTarget);
+    ng.build(config.ProjectPath);
 
-    ng.build(configs.ProjectPath);
+    git.remoteSetUrl(config.ProjectPath, config.GitTarget);
 
-    git.remoteSetUrl(configs.ProjectPath, configs.GitTarget);
+    git.add(config.ProjectPath, '.');
 
-    git.add(configs.ProjectPath, '.');
-
-    git.commit(configs.ProjectPath, 'Data Update');
-    git.push(configs.ProjectPath);
+    git.commit(config.ProjectPath, config.Git.commitMessage);
+    git.push(config.ProjectPath);
 }
 
 module.exports.listen = listen;
