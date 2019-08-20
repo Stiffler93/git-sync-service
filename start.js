@@ -17,6 +17,8 @@ config.DataCopyTarget = path.join(config.GitCheckoutDestination, configFile.Git.
 
 config.Notification = configFile.Notification;
 config.Git = configFile.Git;
+config.Email = configFile.Email;
+
 log('Start service');
 
 // // ON SERVICE START

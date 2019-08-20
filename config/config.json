@@ -17,5 +17,10 @@
     "ID": 45,
     "title": "Juhu",
     "message": "Even more Juhu"
+  },
+  "Email": {
+    "service": "outlook",
+    "from": "webservice1993@hotmail.com",
+    "to": "stefan.leopold@hotmail.com"
   }
 }

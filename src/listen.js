@@ -35,7 +35,7 @@ function handle(filename, config) {
 
     ng.build(config.ProjectPath);
 
-    git.remoteSetUrl(config.ProjectPath, config.GitTarget);
+    git.remoteSetUrl(config.ProjectPath, config.Git.target);
 
     git.add(config.ProjectPath, '.');
 

@@ -1,29 +1,31 @@
 const nodemailer = require("nodemailer");
+const log = require('./logger').log;
+const base64 = require('./base64');
 
-const pw = process.argv[2];
-console.log(pw);
+function sendMail(configs, subject, text) {
+    const transporter = nodemailer.createTransport({
+        service: configs.Email.service,
+        auth: {
+            user: configs.Email.from,
+            pass: base64.decode(process.env.WEBSERVICE1993_PW)
+        }
+    });
 
-const transporter = nodemailer.createTransport({
-    host: "gmail",
-    port: 587,
-    secure: true,
-    auth: {
-        user: 'sonntag19@gmail.com', //process.env.USER,
-        pass: pw
-    },
-    tls: {
-        rejectUnauthorized: true
-    }
-});
+    const mailOptions = {
+        from: configs.Email.from,
+        to: configs.Email.to,
+        subject: subject,
+        text: text
+    };
 
-// send mail with defined transport object
-let info = transporter.sendMail({
-    from: '"Fred Foo" <foo@example.com>', // sender address
-    to: "stefan.leopold@hotmail.com", // list of receivers
-    subject: "Hello ✔", // Subject line
-    text: "Hello world?", // plain text body
-    html: "<b>Hello world?</b>" // html body
-});
+    transporter.sendMail(mailOptions, function (error, info) {
+        if (error) {
+            log(error);
 
-console.log("Message sent: %s", info.messageId);
-console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+        } else {
+            log('Email sent: ' + info.response);
+        }
+    });
+}
+
+module.exports.sendMail = sendMail;

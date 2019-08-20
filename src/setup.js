@@ -6,10 +6,10 @@ const yarn = require('./utils/yarn');
 
 function setup(configs) {
     if (fs.existsSync(configs.ProjectPath)) {
-        git.remoteSetUrl(configs.ProjectPath, configs.GitSource);
+        git.remoteSetUrl(configs.ProjectPath, configs.Git.source);
         git.pull(configs.ProjectPath);
     } else {
-        git.clone(configs.GitSource, configs.GitCheckoutDestination, configs.GitProjectName);
+        git.clone(configs.Git.source, configs.GitCheckoutDestination, configs.Git.projectName);
     }
 
     yarn.install(configs.ProjectPath);
