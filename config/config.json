@@ -14,11 +14,11 @@
     "target": "github-pages",
     "commitMessage": "Data Update"
   },
-
   "Notification": {
     "ID": 45,
     "title": "Juhu",
-    "message": "Even more Juhu"
+    "message": "Even more Juhu",
+    "time": "15:00"
   },
   "Email": {
     "service": "outlook",

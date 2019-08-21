@@ -1,6 +1,5 @@
 const fs = require('fs');
 const path = require('path');
-// const unzip = require('unzip');
 const info = require('./logger').info;
 
 function copy(from, to) {
@@ -31,16 +30,13 @@ function clean(folder) {
     }
 }
 
-// function extract(archive, target, callback) {
-//     log('Extract data from ' + archive + ' into ' + target + ';');
-//
-//     // see: https://github.com/EvanOxfeld/node-unzip
-//     fs.createReadStream(archive).pipe(unzip.Extract({ path: target })).on('close', () => {
-//         log('Unzipping finished');
-//         if(callback) callback();
-//     });
-// }
+function enhanceFileWithDate(file) {
+    const parts = file.split('.');
+    const dateString = new Date().toISOString().substr(0, 10);
+    return parts[0] + '_' + dateString + '.' + parts[1];
+}
 
-// module.exports.extract = extract;
+
 module.exports.clean = clean;
 module.exports.copy = copy;
+module.exports.enhanceFileWithDate = enhanceFileWithDate;

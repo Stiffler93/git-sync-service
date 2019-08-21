@@ -2,12 +2,19 @@ const schedule = require('node-schedule');
 const info = require('./utils/logger').info;
 const notify = require('./utils/notify').notify;
 
-var job;
+let job;
 
 function register(configs) {
     info('Schedule notification job');
 
-    job = schedule.scheduleJob('0 20 8 * * 1-5', function (fireDate) {
+    const times = configs.Notification.time.split(':');
+    const hour = format(times[0]);
+    const minutes = format(times[1]);
+
+    const notificationTime = '0 %minutes% %hour% * * 1-5'.replace('%minutes%', minutes).replace('%hour%', hour);
+    info('Time set: ' + notificationTime);
+
+    job = schedule.scheduleJob(notificationTime, function (fireDate) {
         info('Notification job triggered at ' + fireDate);
         notify(configs);
     });
@@ -20,6 +27,10 @@ function unregister() {
         job = undefined;
         info('Job was canceled');
     }
+}
+
+function format(time) {
+    return time.startsWith('0') ? time.substr(1) : time;
 }
 
 module.exports.register = register;

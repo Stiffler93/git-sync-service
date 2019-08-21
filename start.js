@@ -5,8 +5,7 @@ const setup = require('./src/setup');
 const listen = require('./src/listen');
 const reminder = require('./src/reminder');
 const configFile = require('./config/config.json');
-
-const notify = require('./src/utils/notify');
+const enhanceFileWithDate = require('./src/utils/utilities').enhanceFileWithDate;
 
 const config = {};
 config.WorkingDir = configFile.WorkingDir;
@@ -19,6 +18,8 @@ config.DataCopyTarget = path.join(config.GitCheckoutDestination, configFile.Git.
 config.Notification = configFile.Notification;
 config.Git = configFile.Git;
 config.Email = configFile.Email;
+config.Logging = configFile.Logging;
+config.Logging.file = enhanceFileWithDate(config.Logging.file);
 
 info('Start service');
 
@@ -31,7 +32,7 @@ reminder.register(config);
 // WATCH FOR DIRECTORY CHANGES
 listen.listen(config);
 
-// SHUTDOWN
+// SHUTDOWN HOOKS
 process.on('SIGINT', shutdown);
 process.on('SIGTERM', shutdown);
 
