@@ -24,7 +24,7 @@ config.Logging.file = enhanceFileWithDate(config.Logging.file);
 info('Start service');
 
 // // ON SERVICE START
-// setup.setup(config);
+setup.setup(config);
 
 // SCHEDULE NOTIFICATION
 reminder.register(config);

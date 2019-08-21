@@ -23,6 +23,7 @@
   "Email": {
     "service": "outlook",
     "from": "webservice1993@hotmail.com",
-    "to": "stefan.leopold@hotmail.com"
+    "to": "stefan.leopold@hotmail.com",
+    "onErrors": true
   }
 }

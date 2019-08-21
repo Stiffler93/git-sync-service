@@ -10,13 +10,6 @@ function clone(repo, to, dirname) {
 	exec(command);
 }
 
-function remoteSetUrl(project, url) {
-	const command = 'cd ' + project + ' && git remote set-url origin ' + url;
-	info(command + ';');
-	
-	exec(command);
-}
-
 function checkout(project, branch) {
 	const command = 'cd ' + project + ' && git checkout ' + branch;
     info(command + ';');
@@ -60,7 +53,6 @@ function merge(project, source) {
 }
 
 module.exports.clone = clone;
-module.exports.remoteSetUrl = remoteSetUrl;
 module.exports.checkout = checkout;
 module.exports.add = add;
 module.exports.commit = commit;

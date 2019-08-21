@@ -20,8 +20,8 @@ function sendMail(configs, subject, text) {
 
     transporter.sendMail(mailOptions, function (error, mailInfo) {
         if (error) {
+            info('Email client has an issue. Cannot send mails!');
             info(error);
-
         } else {
             info('Email sent: ' + mailInfo.response);
         }

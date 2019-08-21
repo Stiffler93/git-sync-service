@@ -1,10 +1,18 @@
-// const fs = require('fs');
-const logging = require('../../config/config').Logging;
+const config = require('../../config/config');
+const sendMail = require('./email').sendMail;
 const log4js = require('log4js');
 
 log4js.configure({
-    appenders: {fileAppender: {type: 'fileSync', filename: logging.file, maxLogSize: 10485760, backups: 5, keepFileExt: true}},
-    categories: {default: {appenders: ['fileAppender'], level: logging.level.toLowerCase()}}
+    appenders: {
+        fileAppender: {
+            type: 'fileSync',
+            filename: config.Logging.file,
+            maxLogSize: 10485760,
+            backups: 5,
+            keepFileExt: true
+        }
+    },
+    categories: {default: {appenders: ['fileAppender'], level: config.Logging.level.toLowerCase()}}
 });
 
 const logger = log4js.getLogger();
@@ -14,12 +22,19 @@ function debug(text) {
 }
 
 function info(text) {
-    // console.log(text);
-    // fs.appendFile(logFile, text + '\r\n', 'utf8', err => {
-    //     if (err) console.log('Error on log: ' + err)
-    // });
     logger.info(text);
+}
+
+function error(text, error) {
+    logger.error(text);
+    const errorString = error ? JSON.stringify(error) : "";
+    if (error) logger.error(errorString);
+
+    if (config.Email.onErrors) {
+        sendMail(config, text, errorString);
+    }
 }
 
 module.exports.debug = debug;
 module.exports.info = info;
+module.exports.error = error;
