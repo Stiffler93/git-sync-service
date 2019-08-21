@@ -3,11 +3,12 @@ const path = require('path');
 const git = require('./utils/git');
 const ng = require('./utils/ng');
 const yarn = require('./utils/yarn');
+const info = require('./utils/logger').info;
 const utilities = require('./utils/utilities');
 
 
 function listen(configs) {
-    log('START WATCHING FOR FILE CHANGES');
+    info('START WATCHING FOR FILE CHANGES');
 
     fs.watch(configs.DataDir, (eventType, filename) => {
         if (eventType === 'change') {

@@ -28,9 +28,17 @@ info('Start service');
 // SCHEDULE NOTIFICATION
 reminder.register(config);
 
-// // WATCH FOR DIRECTORY CHANGES
-// listen.listen(config);
+// WATCH FOR DIRECTORY CHANGES
+listen.listen(config);
 
-info('End service');
+// SHUTDOWN
+process.on('SIGINT', shutdown);
+process.on('SIGTERM', shutdown);
 
-// process.exit(0);
+function shutdown(signal) {
+    info('Received: ' + signal);
+    reminder.unregister();
+    info('End service');
+
+    process.exit(0);
+}

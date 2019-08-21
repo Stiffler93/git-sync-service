@@ -3,7 +3,7 @@ const logging = require('../../config/config').Logging;
 const log4js = require('log4js');
 
 log4js.configure({
-    appenders: {fileAppender: {type: 'file', filename: logging.file}},
+    appenders: {fileAppender: {type: 'fileSync', filename: logging.file, maxLogSize: 10485760, backups: 5, keepFileExt: true}},
     categories: {default: {appenders: ['fileAppender'], level: logging.level.toLowerCase()}}
 });
 
