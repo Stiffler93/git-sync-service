@@ -1,4 +1,5 @@
 const path = require('path');
+const info = require('./logger').info;
 const WindowsToaster = require('node-notifier').WindowsToaster;
 const rootFolder = path.dirname(require.main.filename);
 
@@ -9,7 +10,7 @@ const notifier = new WindowsToaster({
 const icon = path.join(rootFolder, 'assets', 'sync.png');
 
 function notify(config) {
-    console.log('notify');
+    info('notify');
     notifier.notify(
         {
             title: config.Notification.title, // String. Required

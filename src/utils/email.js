@@ -1,5 +1,5 @@
 const nodemailer = require("nodemailer");
-const log = require('./logger').log;
+const info = require('./logger').info;
 const base64 = require('./base64');
 
 function sendMail(configs, subject, text) {
@@ -18,12 +18,12 @@ function sendMail(configs, subject, text) {
         text: text
     };
 
-    transporter.sendMail(mailOptions, function (error, info) {
+    transporter.sendMail(mailOptions, function (error, mailInfo) {
         if (error) {
-            log(error);
+            info(error);
 
         } else {
-            log('Email sent: ' + info.response);
+            info('Email sent: ' + mailInfo.response);
         }
     });
 }

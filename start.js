@@ -1,8 +1,9 @@
 const path = require('path');
 
-const log = require('./src/utils/logger').log;
+const info = require('./src/utils/logger').info;
 const setup = require('./src/setup');
 const listen = require('./src/listen');
+const reminder = require('./src/reminder');
 const configFile = require('./config/config.json');
 
 const notify = require('./src/utils/notify');
@@ -19,12 +20,17 @@ config.Notification = configFile.Notification;
 config.Git = configFile.Git;
 config.Email = configFile.Email;
 
-log('Start service');
+info('Start service');
 
 // // ON SERVICE START
 // setup.setup(config);
-//
+
+// SCHEDULE NOTIFICATION
+reminder.register(config);
+
 // // WATCH FOR DIRECTORY CHANGES
 // listen.listen(config);
+
+info('End service');
 
 // process.exit(0);

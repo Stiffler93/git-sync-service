@@ -1,10 +1,10 @@
-const log = require('./logger').log;
+const info = require('./logger').info;
 const exec = require('child_process').execSync;
 
 // build needs npm install but that takes too long!
 function build(project) {
 	const command = 'cd ' + project + ' && ng build --prod --output-path docs --base-href "/loziska/"';
-	log(command + ';');
+	info(command + ';');
 	
 	exec(command);
 }

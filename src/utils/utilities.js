@@ -1,10 +1,10 @@
 const fs = require('fs');
 const path = require('path');
 // const unzip = require('unzip');
-const log = require('./logger').log;
+const info = require('./logger').info;
 
 function copy(from, to) {
-    log('Copy data from ' + from + ' to ' + to);
+    info('Copy data from ' + from + ' to ' + to);
     const files = fs.readdirSync(from);
 
     for (const file of files) {
@@ -12,11 +12,10 @@ function copy(from, to) {
         const toPath = path.join(to, file);
         fs.copyFileSync(fromPath, toPath);
     }
-
 }
 
 function clean(folder) {
-    log('Clean: ' + folder);
+    info('Clean: ' + folder);
     const files = fs.readdirSync(folder);
 
     for (const file of files) {
@@ -28,7 +27,7 @@ function clean(folder) {
             fs.unlinkSync(filePath);
         } else if (stats.isDirectory()) {
             clean(filePath, fs.rmdirSync(filePath));
-        } else log('WARNING: ' + file + ' is neither a file nor a directory!');
+        } else info('WARNING: ' + file + ' is neither a file nor a directory!');
     }
 }
 

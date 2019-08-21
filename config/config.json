@@ -4,8 +4,10 @@
   "DataDir": "Data",
   "GitCheckoutDestination": "GitCheckout",
   "DataCopyTarget": "src\\assets\\data",
-  "LogFile": "C:\\Users\\sso2bj\\Documents\\Test\\service.log",
-
+  "Logging": {
+    "file": "C:\\Users\\sso2bj\\Documents\\service.log",
+    "level": "info"
+  },
   "Git": {
     "projectName": "project",
     "source": "master",

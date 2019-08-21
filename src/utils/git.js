@@ -1,9 +1,9 @@
-const log = require('./logger.js').log;
+const info = require('./logger.js').info;
 const exec = require('child_process').execSync;
 
 function clone(repo, to, dirname) {
 	const targetDir = to + '\\' + dirname;
-	log('clone ' + repo + ' into ' + targetDir + ';');
+	info('clone ' + repo + ' into ' + targetDir + ';');
 	
 	const command = 'git clone ' + repo + ' ' + targetDir;
 	
@@ -12,49 +12,49 @@ function clone(repo, to, dirname) {
 
 function remoteSetUrl(project, url) {
 	const command = 'cd ' + project + ' && git remote set-url origin ' + url;
-	log(command + ';');
+	info(command + ';');
 	
 	exec(command);
 }
 
 function checkout(project, branch) {
 	const command = 'cd ' + project + ' && git checkout ' + branch;
-    log(command + ';');
+    info(command + ';');
 
     exec(command);
 }
 
 function add(project, file) {
 	const command = 'cd ' + project + ' && git add ' + file;
-	log(command + ';');
+	info(command + ';');
 	
 	exec(command);
 }
 
 function commit(project, message) {
 	const command = 'cd ' + project + ' && git commit -m "' + message + '"';
-	log(command + ';');
+	info(command + ';');
 	
 	exec(command);
 }
 
 function push(project) {
     const command = 'cd ' + project + ' && git push --force';
-    log(command + ';');
+    info(command + ';');
 
     exec(command);
 }
 
 function pull(project) {
     const command = 'cd ' + project + ' && git pull --force';
-    log(command + ';');
+    info(command + ';');
 
     exec(command);
 }
 
 function merge(project, source) {
     const command = 'cd ' + project + ' && git merge -X theirs ' + source;
-    log(command + ';');
+    info(command + ';');
 
     exec(command);
 }
