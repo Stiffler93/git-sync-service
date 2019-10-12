@@ -1,17 +1,17 @@
 const info = require('./logger.js').info;
 const exec = require('child_process').execSync;
 
-function clone(repo, to, dirname) {
-	const targetDir = to + '\\' + dirname;
+function clone(repo, targetDir) {
 	info('clone ' + repo + ' into ' + targetDir + ';');
 	
 	const command = 'git clone ' + repo + ' ' + targetDir;
-	
-	exec(command);
+    info(command + ';');
+
+    exec(command);
 }
 
 function checkout(project, branch) {
-	const command = 'cd ' + project + ' && git checkout ' + branch;
+	const command = 'cd ' + project + ' && git checkout -B ' + branch;
     info(command + ';');
 
     exec(command);
@@ -31,8 +31,8 @@ function commit(project, message) {
 	exec(command);
 }
 
-function push(project) {
-    const command = 'cd ' + project + ' && git push --force';
+function push(project, branch) {
+    const command = 'cd ' + project + ' && git push --force --set-upstream origin ' + branch;
     info(command + ';');
 
     exec(command);

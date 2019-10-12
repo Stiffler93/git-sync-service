@@ -7,6 +7,9 @@ function copy(from, to) {
     const files = fs.readdirSync(from);
 
     for (const file of files) {
+        if (!file.endsWith('.csv'))
+            continue;
+
         const fromPath = path.join(from, file);
         const toPath = path.join(to, file);
         fs.copyFileSync(fromPath, toPath);
@@ -30,13 +33,13 @@ function clean(folder) {
     }
 }
 
-function enhanceFileWithDate(file) {
-    const parts = file.split('.');
-    const dateString = new Date().toISOString().substr(0, 10);
-    return parts[0] + '_' + dateString + '.' + parts[1];
+function create404Page(config) {
+    const fromPath = path.join(config.BuildTarget, 'index.html');
+    const toPath = path.join(config.BuildTarget, '404.html');
+    fs.copyFileSync(fromPath, toPath);
 }
 
 
 module.exports.clean = clean;
 module.exports.copy = copy;
-module.exports.enhanceFileWithDate = enhanceFileWithDate;
+module.exports.create404Page = create404Page;

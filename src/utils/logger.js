@@ -6,7 +6,7 @@ log4js.configure({
     appenders: {
         fileAppender: {
             type: 'fileSync',
-            filename: config.Logging.file,
+            filename: enhanceFileWithDate(config.Logging.file),
             maxLogSize: 10485760,
             backups: 5,
             keepFileExt: true
@@ -33,6 +33,12 @@ function error(text, error) {
     if (config.Email.onErrors) {
         sendMail(config, text, errorString);
     }
+}
+
+function enhanceFileWithDate(file) {
+    const parts = file.split('.');
+    const dateString = new Date().toISOString().substr(0, 10);
+    return parts[0] + '_' + dateString + '.' + parts[1];
 }
 
 module.exports.debug = debug;

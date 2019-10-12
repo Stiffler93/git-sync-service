@@ -1,0 +1,5 @@
+1) Install Node.js (latest version)
+2) Install Angular CLI
+3) Execute the Script
+4) Add config.json to .gitignore
+5) Add Git Username, E-mail and SSH Key

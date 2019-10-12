@@ -1,17 +1,17 @@
 {
-  "WorkingDir": "C:\\Users\\sso2bj\\Documents\\Test",
-  "UnzipTarget": "Temp",
-  "DataDir": "Data",
+  "WorkingDir": "/home/stefan/temp",
+  "DataSource": "Data",
   "GitCheckoutDestination": "GitCheckout",
-  "DataCopyTarget": "src\\assets\\data",
+  "DataCopyTarget": "src/assets/data",
   "Logging": {
-    "file": "C:\\Users\\sso2bj\\Documents\\service.log",
-    "level": "info"
+    "file": "/home/stefan/temp/service.log",
+    "level": "debug"
   },
   "Git": {
     "projectName": "project",
+    "repo": "git@github.com:Stiffler93/loziska.git",
     "source": "master",
-    "target": "github-pages",
+    "target": "gh-pages",
     "commitMessage": "Data Update"
   },
   "Notification": {
@@ -25,5 +25,15 @@
     "from": "webservice1993@hotmail.com",
     "to": "stefan.leopold@hotmail.com",
     "onErrors": true
+  },
+  "CSV": {
+    "values": [
+      "Popis",
+      "Stav zásoby"
+    ],
+    "fileNameMappings": {
+      "Seznam zásob na skladě ' Bureš GUFERA'.xlsx": "Gufera.csv",
+      "Seznam zásob na skladě 'Ložiska ZKL ZVL'.xlsx": "Ložiska.csv"
+    }
   }
 }

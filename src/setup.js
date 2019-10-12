@@ -1,7 +1,7 @@
 const fs = require('fs');
 const git = require('./utils/git');
 const ng = require('./utils/ng');
-const yarn = require('./utils/yarn');
+const npm = require('./utils/npm');
 
 
 function setup(configs) {
@@ -9,10 +9,11 @@ function setup(configs) {
         git.checkout(configs.ProjectPath, configs.Git.source);
         git.pull(configs.ProjectPath);
     } else {
-        git.clone(configs.Git.source, configs.GitCheckoutDestination, configs.Git.projectName);
+        git.clone(configs.Git.repo, configs.ProjectPath);
+        git.checkout(configs.ProjectPath, configs.Git.source);
     }
 
-    yarn.install(configs.ProjectPath);
+    npm.install(configs.ProjectPath);
     ng.build(configs.ProjectPath);
 }
 
