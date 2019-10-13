@@ -1,17 +1,27 @@
 const fs = require('fs');
 const path = require('path');
 const info = require('./logger').info;
+const debug = require('./logger').debug;
 
-function copy(from, to) {
+function copy(from, to, filetype) {
     info('Copy data from ' + from + ' to ' + to);
     const files = fs.readdirSync(from);
 
     for (const file of files) {
-        if (!file.endsWith('.csv'))
+        if (filetype && !file.endsWith(filetype))
             continue;
 
         const fromPath = path.join(from, file);
         const toPath = path.join(to, file);
+
+        const stats = fs.statSync(fromPath);
+        if (stats.isDirectory()) {
+            if (!fs.existsSync(toPath)) fs.mkdirSync(toPath);
+            copy(fromPath, toPath, filetype);
+            continue;
+        }
+
+        debug('Copy ' + fromPath + ' to ' + toPath);
         fs.copyFileSync(fromPath, toPath);
     }
 }
