@@ -21,8 +21,8 @@
     "time": "15:00"
   },
   "Email": {
-    "service": "outlook",
-    "from": "webservice1993@hotmail.com",
+    "domain": "sandboxe73c9c6aaa2f4940bd53576d832f1d83.mailgun.org",
+    "from": "git-sync-service.haruda@mailgun.org",
     "to": "stefan.leopold@hotmail.com",
     "onErrors": true
   },

@@ -1,31 +1,31 @@
-const nodemailer = require("nodemailer");
-const info = require('./logger').info;
 const base64 = require('./base64');
+const Mailgun = require('mailgun-js');
 
 function sendMail(configs, subject, text) {
-    const transporter = nodemailer.createTransport({
-        service: configs.Email.service,
-        auth: {
-            user: configs.Email.from,
-            pass: base64.decode(process.env.WEBSERVICE1993_PW)
-        }
-    });
+    const info = require('./logger').info;
 
-    const mailOptions = {
+    info('send mail');
+    const apiKey = base64.decode(process.env.MAILGUN_API_KEY).trim();
+    const mailgun = new Mailgun({apiKey: apiKey, domain: configs.Email.domain});
+
+    const data = {
         from: configs.Email.from,
         to: configs.Email.to,
         subject: subject,
         text: text
     };
+    info({'data': data});
 
-    transporter.sendMail(mailOptions, function (error, mailInfo) {
+    mailgun.messages().send(data, function (error, body) {
         if (error) {
             info('Email client has an issue. Cannot send mails!');
             info(error);
         } else {
-            info('Email sent: ' + mailInfo.response);
+            info('Email sent');
+            info(body);
         }
     });
 }
+
 
 module.exports.sendMail = sendMail;

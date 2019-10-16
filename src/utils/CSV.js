@@ -23,6 +23,8 @@ function prepare(config) {
         const content = parse(fromPath, config);
         fs.writeFileSync(toPath, content);
     }
+
+    info('Data successfully prepared.');
 }
 
 function quitProcess() {

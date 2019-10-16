@@ -18,20 +18,26 @@ log4js.configure({
 const logger = log4js.getLogger();
 
 function debug(text) {
+    text = text === 'string' ? text : JSON.stringify(text);
     logger.debug(text);
 }
 
 function info(text) {
+    text = text === 'string' ? text : JSON.stringify(text);
     logger.info(text);
 }
 
 function error(text, error) {
+    text = text === 'string' ? text : JSON.stringify(text);
     logger.error(text);
-    const errorString = error ? JSON.stringify(error) : "";
+    let errorString = error ? JSON.stringify(error) : "";
     if (error) logger.error(errorString);
 
     if (config.Email.onErrors) {
-        sendMail(config, text, errorString);
+        if (!error) errorString = text;
+        const subject = error ? text : 'Error occured in git-sync-service.';
+        const content = error ? errorString : text;
+        sendMail(config, subject, content);
     }
 }
 
