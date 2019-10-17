@@ -4,52 +4,52 @@ const exec = require('child_process').execSync;
 const tc = require('./tryCatch').tc;
 
 function clone(repo, targetDir) {
-    const command = 'git clone ' + repo + ' ' + targetDir;
+    const command = 'git clone ' + repo + ' ' + targetDir + ' --quiet';
     info(command + ';');
 
-    exec(command);
+    exec(command, {stdio: 'ignore'});
 }
 
 function checkout(project, branch) {
-    const command = 'cd ' + project + ' && git checkout -B ' + branch;
+    const command = 'cd ' + project + ' && git checkout -B ' + branch + ' --quiet';
     info(command + ';');
 
-    tc(() => exec(command), error);
+    tc(() => exec(command, {stdio: 'ignore'}), error);
 }
 
 function add(project, file) {
     const command = 'cd ' + project + ' && git add ' + file;
     info(command + ';');
 
-    tc(() => exec(command), error);
+    tc(() => exec(command, {stdio: 'ignore'}), error);
 }
 
 function commit(project, message) {
-    const command = 'cd ' + project + ' && git commit -m "' + message + '"';
+    const command = 'cd ' + project + ' && git commit -m "' + message + '"' + ' --quiet';
     info(command + ';');
 
-    tc(() => exec(command), error, false);
+    tc(() => exec(command, {stdio: 'ignore'}), error, false);
 }
 
 function push(project, branch) {
-    const command = 'cd ' + project + ' && git push --force --set-upstream origin ' + branch;
+    const command = 'cd ' + project + ' && git push --force --set-upstream origin ' + branch + ' --quiet';
     info(command + ';');
 
-    tc(() => exec(command), error);
+    tc(() => exec(command, {stdio: 'ignore'}), error);
 }
 
 function pull(project) {
-    const command = 'cd ' + project + ' && git pull --force';
+    const command = 'cd ' + project + ' && git pull --force' + ' --quiet';
     info(command + ';');
 
-    tc(() => exec(command), error);
+    tc(() => exec(command, {stdio: 'ignore'}), error);
 }
 
 function merge(project, source) {
-    const command = 'cd ' + project + ' && git merge -X theirs ' + source;
+    const command = 'cd ' + project + ' && git merge -X theirs ' + source + ' --quiet';
     info(command + ';');
 
-    tc(() => exec(command), error);
+    tc(() => exec(command, {stdio: 'ignore'}), error);
 }
 
 module.exports = {

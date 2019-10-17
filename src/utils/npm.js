@@ -5,10 +5,10 @@ const tc = require('./tryCatch').tc;
 
 
 function install(project) {
-    const command = 'cd ' + project + ' && npm install';
+    const command = 'cd ' + project + ' && npm install --silent';
     info(command + ';');
 
-    tc(() => exec(command), error);
+    tc(() => exec(command, {stdio: 'ignore'}), error);
 }
 
 module.exports.install = install;

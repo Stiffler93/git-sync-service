@@ -1,4 +1,5 @@
 const path = require('path');
+const cli_progress = require('cli-progress');
 
 const info = require('./src/utils/logger').info;
 const setup = require('./src/setup');
@@ -24,6 +25,22 @@ config.CSV = configFile.CSV;
 info('Start service');
 info({'Config': config});
 
+config.progressBar = new cli_progress.SingleBar({}, cli_progress.Presets.shades_classic);
+config.progressBarValue = 0;
+config.progressBarMaxValue = 100;
+config.proceed = function(value) {
+    this.progressBarValue += value;
+    if (this.progressBarValue > this.progressBarMaxValue)
+        this.progressBarValue = this.progressBarMaxValue;
+    this.progressBar.update(this.progressBarValue);
+};
+config.finish = function() {
+    this.progressBar.update(this.progressBarMaxValue);
+    this.progressBar.stop();
+};
+
+config.progressBar.start(config.progressBarMaxValue, config.progressBarValue);
+
 // // ON SERVICE START
 setup.setup(config);
 
@@ -32,3 +49,5 @@ CSV.prepare(config);
 
 // UPDATE REPO
 updater.update(config);
+
+config.finish();

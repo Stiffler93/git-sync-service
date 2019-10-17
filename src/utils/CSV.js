@@ -8,9 +8,11 @@ function prepare(config) {
     info('Prepare Data from Excel');
     if (!fs.existsSync(config.DataSource)) quitProcess();
 
+    config.proceed(7);
+
     const files = fs.readdirSync(config.DataSource);
 
-    if (files.length === 0) quitProcess();
+    if (files.length === 0) quitProcess(config);
 
     for (const file of files) {
         if (!file.endsWith('.xlsx')) continue;
@@ -24,11 +26,14 @@ function prepare(config) {
         fs.writeFileSync(toPath, content);
     }
 
+    config.proceed(11);
+
     info('Data successfully prepared.');
 }
 
-function quitProcess() {
+function quitProcess(config) {
     info('There is no data (XLSX) to update. Terminate Script.');
+    config.finish();
     process.exit(1);
 }
 
