@@ -1,6 +1,12 @@
 1) Install Node.js (latest version)
-2) Install Angular CLI
-3) Execute the Script
-4) Add config.json to .gitignore
-5) Add Git Username, E-mail and SSH Key
-6) Add API-Key (MAILGUN_API_KEY) base64 encoded as Env variable for email client
+2) Install Angular CLI (npm install -q @angular/cli)
+3) Add config.json to .gitignore
+4) Install NPM packages
+5) Install git (https://git-scm.com/download/win) and select CMD integration (not BASH only)
+6) Add Git Username (git config --global user.name "FIRST_NAME LAST_NAME")
+7) Add Git E-mail (git config --global user.email "E-MAIL")
+8) Add SSH Key (Windows: https://putty.org, https://devops.ionos.com/tutorials/use-ssh-keys-with-putty-on-windows/, Linux: ssh-keygen
+9) Add API-Key (MAILGUN_API_KEY) base64 encoded as Env variable for email client
+10) Restart Windows PC
+11) Configure Script (config.json)
+12) Execute.
