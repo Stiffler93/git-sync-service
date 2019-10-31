@@ -6,7 +6,7 @@ const xlsx = require('node-xlsx');
 
 function prepare(config) {
     info('Prepare Data from Excel');
-    if (!fs.existsSync(config.DataSource)) quitProcess();
+    if (!fs.existsSync(config.DataSource)) quitProcess(config);
 
     config.proceed(7);
 
