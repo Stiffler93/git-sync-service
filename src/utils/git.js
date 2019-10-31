@@ -39,7 +39,7 @@ function push(project, branch) {
 }
 
 function pull(project) {
-    const command = 'cd ' + project + ' && git pull --force' + ' --quiet';
+    const command = 'cd ' + project + ' && git reset --hard origin/master && git pull';
     info(command + ';');
 
     tc(() => exec(command, {stdio: 'ignore'}), error);
