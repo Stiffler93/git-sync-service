@@ -1,10 +1,10 @@
 {
-  "WorkingDir": "/home/stefan/temp",
+  "WorkingDir": "/home/stefan/Data/GitSyncTest",
   "DataSource": "Data",
   "GitCheckoutDestination": "GitCheckout",
   "DataCopyTarget": "src/assets/data",
   "Logging": {
-    "file": "/home/stefan/temp/service.log",
+    "file": "/home/stefan/Data/GitSyncTest/service.log",
     "level": "debug"
   },
   "Git": {

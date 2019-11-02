@@ -54,7 +54,7 @@ function parse(file, config) {
     let content = '';
     csvData.forEach(row => {
         content += (row.filter((value, index) => indices.includes(index))
-            .map(value => trim(value)).join(',') + '\n');
+            .map(value => prepareValue(value)).join(',') + '\n');
     });
 
     info('Content: >' + content + '<');
@@ -62,11 +62,11 @@ function parse(file, config) {
     return content;
 }
 
-function trim(str) {
+function prepareValue(str) {
     if (typeof str !== 'string')
         return str;
 
-    return str.trim().split(/\s+/).join(' ');
+    return '"' + str.trim().split(/\s+/).join(' ') + '"';
 }
 
 
